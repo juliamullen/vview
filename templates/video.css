@@ -1,0 +1,49 @@
+body {
+	margin:0;
+}
+
+#topic {
+	margin:0 0;
+	max-width:100vw;
+	max-height:100vh;
+}
+
+.or {
+	max-height:100vw !important;
+	max-width:100vh !important;
+	width:90vh;
+	transform-origin:right;
+//	transform:rotate(90deg) translate(85%, -10%);
+	transform:rotate(90deg) translate(10%, 5%);
+}
+@media only screen and (max-width:800px) {
+	#topic {
+		width:100vw;
+	}
+
+	#sidepanel {
+		height:5vh;
+		position:relative;
+	}
+
+}
+
+.ol {
+	max-height:100vw !important;
+	max-width:100vh !important;
+	width:90vh;
+	transform-origin:right;
+	transform:rotate(-90deg) translate(90%, -5%);
+}
+
+.of {
+	transform:rotate(180deg);
+}
+
+#sidepanel {
+	position:absolute;
+	top:0;
+	right:0;
+	width:9vw;
+}
+

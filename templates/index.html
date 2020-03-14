@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@12.0.0/dist/lazyload.min.js"></script>
+  </head>
+  <body>
+    <table>
+      {% for video in videos %}
+      <tr>
+	<td height="200px">
+	  {% if tag_mode %}
+	  <a href="{{ url_for('video_view_for_tag', video=video[0], tag=tag) }}">{{ video[0] }}</a>
+	  {% else %}
+	  <a href="/videos/{{ video[0] }}">{{ video[0] }}</a>
+	  {% endif %}
+	</td>
+	<td>
+	<p id="tag-list">{% for tag in video[1] %}<a href="{{ url_for('show_videos_for_tag', tag_name=tag) }}">{{ tag }}</a>, {% endfor %}</p>
+	</td>
+	<td>
+	  <img class="lazy" data-src="{{ url_for('static', filename=video[2]) }}" >
+	</td>
+	<td>{{ video[3] }}</td>
+      </tr>
+      {% endfor %}
+      </li>
+    <script type="text/javascript">
+    var lazyLoadInstance = new LazyLoad({
+		elements_selector: ".lazy"
+    });
+    if (lazyLoadInstance) {
+    	    lazyLoadInstance.update();
+    }
+    </script>
+  </body>
+</html>

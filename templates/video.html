@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+	<head>
+<link rel="stylesheet" href="video.css">
+	</head>
+	<body>
+		<section id="content">
+		{% if 'jpg' in video_path.lower() or 'gif' in video_path.lower() or 'png' in video_path.lower() %}
+		<img src="{{ url_for('static', filename=video_path) }}"  id="topic"/>
+		{% else %}
+		<video src="{{ url_for('static', filename=video_path) }}" muted controls autoplay loop id="topic" class="{{ 'or' if 'or' in tags }} {{ 'ol' if 'ol' in tags }}">?</video>
+		{% endif %}
+		</section>
+		<section id="sidepanel">
+			<p id="tag-list">Tags for video: {% for tag in tags %}<a href="{{ url_for('show_videos_for_tag', tag_name=tag) }}">{{ tag }}</a>, {% endfor %}</p>
+			<form action="#" onsubmit="postTag(); return false"><input type="text" id="tag"><button >Create</button></form>
+			<p>{{ video_path }}</p>
+			{% if tag_mode %}
+			<a href="{{ url_for('show_video', video=video_path) }}">{{ video_path }}</a>
+			<a href="{{ url_for('video_view_for_tag', video=meta.last, tag=tag) }}" id="previous">Prev</a>
+			<a href="{{ url_for('rando_video_for_tag', tag=tag) }}" id="rand">Rando</a>
+			<a href="{{ url_for('video_view_for_tag', video=meta.next, tag=tag) }}" id="next">Next</a>
+			{% else %}
+			<p>{{ video_path }}</p>
+			<a href="{{ url_for('show_video', video=meta.last) }}" id="previous">Prev</a>
+			<a href="{{ url_for('random_video') }}" id="rand">Rando</a>
+			<a href="{{ url_for('show_video', video=meta.next) }}" id="next">Next</a>
+			{% endif %}
+			<br />
+			<span>{{ meta.time }}</span>
+			<br />
+			<button onclick="setSpeed(0.08)">0.08</button>
+			<button onclick="setSpeed(0.25)">0.25</button>
+			<button onclick="setSpeed(1)">1</button>
+			<button onclick="setSpeed(2)">2</button>
+			<br />
+			<button onclick="rotate(90)">rotate right</button>
+			<button onclick="rotate(0)">rotate normal</button>
+			<button onclick="rotate(-90)">rotate left</button>
+			<button onclick="rotate(180)">rotate upside-down</button>
+			<br />
+		</section>
+	<script type="text/javascript" src="video.js">
+	</script>
+	</body>
+</html>
